@@ -54,5 +54,19 @@ describe 'valueHand', ->
     ]
 
     value = valueHand analyzeHand myCards, communityCards
+    value.should.be.greaterThan 0.9
 
+  it 'should value K/Q 8/10/Q highly', ->
+    myCards = [
+      {rank: 'K', suit: 'hearts'}
+      {rank: 'Q', suit: 'diamonds'}
+    ]
+
+    communityCards = [
+      {rank: '8', suit: 'hearts'}
+      {rank: '10', suit: 'diamonds'}
+      {rank: 'Q', suit: 'spades'}
+    ]
+
+    value = valueHand analyzeHand myCards, communityCards
     value.should.be.greaterThan 0.9
