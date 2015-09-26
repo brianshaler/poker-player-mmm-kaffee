@@ -2,8 +2,7 @@ _ = require 'lodash'
 
 decodeRank = require './decodeRank'
 
-module.exports = (gameState) ->
-  me = gameState.players[gameState.in_action]
+module.exports = (myCards, communityCards) ->
 
   processCards = (cards = []) ->
     _.map cards, (card) ->
@@ -11,8 +10,8 @@ module.exports = (gameState) ->
       rank: decodeRank card.rank
       suit: card.suit
 
-  hole = processCards me.hole_cards
-  community = processCards me.community_cards
+  hole = processCards myCards
+  community = processCards communityCards
 
   hole: hole
   community: community

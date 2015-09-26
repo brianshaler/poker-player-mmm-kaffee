@@ -1,0 +1,58 @@
+{
+  "tournament_id": "55b644769533c10003000003",
+  "game_id": "5606871ecf091e000300006c",
+  "round": 52,
+  "players": [
+    {
+      "name": "Goku",
+      "stack": 0,
+      "status": "out",
+      "bet": 0,
+      "version": "Goku JS - it's over 9004",
+      "id": 0
+    },
+    {
+      "name": "mmm kaffee",
+      "stack": 3000,
+      "status": "active",
+      "bet": 160,
+      "hole_cards": [
+        {
+          "rank": "8",
+          "suit": "hearts"
+        },
+        {
+          "rank": "J",
+          "suit": "hearts"
+        }
+      ],
+      "version": "0.2.1",
+      "id": 1
+    },
+    {
+      "name": "Ace of Spades",
+      "stack": 0,
+      "status": "out",
+      "bet": 0,
+      "version": "be more passive",
+      "id": 2
+    },
+    {
+      "name": "Perl Jim",
+      "stack": 520,
+      "status": "active",
+      "bet": 320,
+      "version": "0.0.8",
+      "id": 3
+    }
+  ],
+  "small_blind": 160,
+  "orbits": 13,
+  "dealer": 3,
+  "community_cards": [],
+  "current_buy_in": 320,
+  "pot": 480,
+  "in_action": 1,
+  "minimum_raise": 160,
+  "bet_index": 4
+}

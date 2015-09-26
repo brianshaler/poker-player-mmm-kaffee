@@ -17,7 +17,9 @@ module.exports =
     minBet = getMinBet gameState
     seriousness = minBet / (gameState.small_blind * 2)
 
-    hand = analyzeHand gameState
+    myCards = gameState.players[gameState.in_action].hole_cards
+    communityCards = gameState.community_cards
+    hand = analyzeHand myCards, communityCards
     value = valueHand hand
 
     if commitment == 0

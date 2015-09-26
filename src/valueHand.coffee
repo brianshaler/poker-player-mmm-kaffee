@@ -22,9 +22,10 @@ module.exports = (hand) ->
   else
     value -= 0.1
 
-  highCards = _.filter hand.hole, (card) -> card.rank > 8
+  highCards = _.filter hand.hole, (card) -> card.rank > 10
 
-  value = value + ((highCards.length / hand.all.length) - value) * 0.5
+  if highCards.length > 0
+    value = value + (highCards.length / hand.all.length) * 0.5
 
   if value > 0
     value /= variance
