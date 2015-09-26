@@ -28,8 +28,8 @@ module.exports = ->
           return res.send null, 0
         hand = analyzeHand gameState
         logs = [
-          gameState
-          hand.hole
+          JSON.stringify gameState
+          JSON.stringify hand.hole
           "betting #{bet}"
         ].join '\n'
         console.log JSON.stringify logs, null, 2
