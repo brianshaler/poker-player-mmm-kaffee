@@ -23,6 +23,14 @@ module.exports =
     .filter (group) -> group.length > 1
     .value()
 
+    cpairs = _ myHand.community
+    .groupBy (card) -> card.rankString
+    .filter (group) -> group.length > 1
+    .value()
+
+    if cpairs.length == pairs.length
+      pairs = []
+
     if commitment == 0 and seriousness > 2
       unless pairs.length > 0
         console.log 'too serious'
@@ -31,7 +39,7 @@ module.exports =
     if pairs.length > 0
       return next null, minBet * 10
 
-    if seriousness > 5
+    if seriousness > 3
       return next null, 0
 
     next null, minBet
