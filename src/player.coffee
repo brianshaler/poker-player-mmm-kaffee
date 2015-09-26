@@ -19,7 +19,10 @@ module.exports =
     commitment = me.bet
     minBet = getMinBet gameState
     minBet = minBet + Math.round Math.random() * 2
-    maxBet = me.stack * 0.8
+    maxBet = if me.stack < 400
+      me.stack * 0.3
+    else
+      me.stack * 0.8
     maxBet = minBet if maxBet < minBet
     seriousness = minBet / (gameState.small_blind * 2)
 
