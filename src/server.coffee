@@ -1,6 +1,8 @@
 player = require './player'
 express = require 'express'
 
+analyzeHand = require './analyzeHand'
+
 module.exports = ->
   app = express()
 
