@@ -1,7 +1,7 @@
 {
   "name": "poker-player-javascript",
   "description": "Javascript player from lean poker. http://leanpoker.org",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "private": true,
   "dependencies": {
     "coffee-script": "^1.10.0",
