@@ -32,7 +32,7 @@ module.exports = ->
           JSON.stringify hand.hole
           "betting #{bet}"
         ].join '\n'
-        console.log JSON.stringify logs, null, 2
+        console.log logs
         res.send 200, bet
     else if action == 'showdown'
       player.showdown gameState, (err) ->
