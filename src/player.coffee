@@ -45,7 +45,7 @@ module.exports =
       if value < 1
         bet = maxBet unless bet < maxBet
       bet = minBet unless bet > minBet
-      return sendBet maxBet
+      return sendBet bet
 
     if communityCards.length == 0
       if value > 0.5 and me.bet < 200
