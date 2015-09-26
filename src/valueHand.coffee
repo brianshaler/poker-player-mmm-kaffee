@@ -3,7 +3,7 @@ _ = require 'lodash'
 detectStraight = require './detectStraight'
 
 module.exports = (hand) ->
-  variance = 8 - hand.all.length
+  variance = (8 - hand.all.length) / 2
 
   pairs = _ hand.all
   .groupBy (card) -> card.rankString
