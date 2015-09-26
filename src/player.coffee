@@ -2,7 +2,8 @@ _ = require 'lodash'
 
 pkg = require '../package.json'
 
-decodeRank = require './decodeRank'
+getMinBet = require './getMinBet'
+analyzeHand = require './analyzeHand'
 
 module.exports =
   version: ->
@@ -10,42 +11,29 @@ module.exports =
   betRequest: (gameState, next) ->
     if gameState.testBet
       return next null, gameState.testBet
-    bigBlind = gameState.small_blind * 2
-    minBet = bigBlind
-    bet = gameState.current_buy_in
-    bet = minBet unless bet > minBet
 
-    me = gameState?.players?[gameState?.in_action]
-    if me.hole_cards?.length == 1
-      card = me.hole_cards[0]
-      value = decodeRank card.rank
-      if value < 10
-        return next null, 0
+    commitment = gameState.players[gameState.in_action]?.bet
+    minBet = getMinBet gameState
+    seriousness = minBet / (gameState.small_blind * 2)
 
-    unless me.hole_cards?.length > 1
-      return next null, bet
+    myHand = analyzeHand gameState
 
-    cards = _.map me.hole_cards, (card) ->
-      suit: card.suit
-      rank: decodeRank card.rank
-
-    communityCards = _.map (me.community_cards ? []), (card) ->
-      suit: card.suit
-      rank: decodeRank card.rank
-
-    if cards[0]?.rank == cards[0]?.rank
-      return next null, bigBlind
-
-    allCards = cards.concat communityCards
-
-    pairs = _ allCards
-    .groupBy (card) -> String card.rank
+    pairs = _ myHand.all
+    .groupBy (card) -> card.rankString
     .filter (group) -> group.length > 1
     .value()
 
-    if pairs.length > 0
-      return next null, bigBlind
+    if commitment == 0 and seriousness > 2
+      unless pairs.length > 0
+        console.log 'too serious'
+        return next null, 0
 
-    next null, bet
+    if pairs.length > 0
+      return next null, minBet * 10
+
+    if seriousness > 5
+      return next null, 0
+
+    next null, minBet
   showdown: (gameState, next) ->
     next()
