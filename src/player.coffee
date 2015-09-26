@@ -1,3 +1,5 @@
+_ = require 'lodash'
+
 pkg = require '../package.json'
 
 decodeRank = require './decodeRank'
