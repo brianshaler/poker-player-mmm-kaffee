@@ -16,30 +16,18 @@ module.exports =
     minBet = getMinBet gameState
     seriousness = minBet / (gameState.small_blind * 2)
 
-    myHand = analyzeHand gameState
-
-    pairs = _ myHand.all
-    .groupBy (card) -> card.rankString
-    .filter (group) -> group.length > 1
-    .value()
-
-    cpairs = _ myHand.community
-    .groupBy (card) -> card.rankString
-    .filter (group) -> group.length > 1
-    .value()
-
-    if cpairs.length == pairs.length
-      pairs = []
+    hand = analyzeHand gameState
+    value = valueHand hand
 
     if commitment == 0 and seriousness > 2
-      unless pairs.length > 0
+      unless value > 0
         console.log 'too serious'
         return next null, 0
 
-    if pairs.length > 0
+    if value > 0
       return next null, minBet * 10
 
-    if seriousness > 3
+    if seriousness > value * 2
       return next null, 0
 
     next null, minBet

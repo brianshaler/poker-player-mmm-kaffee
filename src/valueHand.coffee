@@ -1,14 +1,14 @@
 _ = require 'lodash'
 
-module.exports = (allCards) ->
-  variance = 8 - allCards.length
+module.exports = (hand) ->
+  variance = 8 - hand.all.length
 
-  pairs = _ myHand.all
+  pairs = _ hand.all
   .groupBy (card) -> card.rankString
   .filter (group) -> group.length > 1
   .value()
 
-  cpairs = _ myHand.community
+  cpairs = _ hand.community
   .groupBy (card) -> card.rankString
   .filter (group) -> group.length > 1
   .value()
@@ -18,8 +18,15 @@ module.exports = (allCards) ->
   value = 0
 
   if myPairs > 0
-    value = 100
+    value += 1
+  else
+    value -= 0.1
+
+  highCards = _.filter hand.hole, (card) -> card.rank > 8
+
+  value = value + ((highCards.length / hand.all.length) - value) * 0.5
 
   if value > 0
     value /= variance
+
   value
