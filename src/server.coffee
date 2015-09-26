@@ -8,12 +8,15 @@ module.exports = ->
   app.use express.urlencoded()
 
   app.all '/', (req, res, next) ->
+    console.log '/', action
     action = req.body?.action ? req.query?.action
     gameState = req.body?.game_state ? req.query?.game_state
     if typeof gameState is 'string'
-      gameState = JSON.parse gameState
+      try
+        gameState = JSON.parse gameState
+      catch err
+        return next err
 
-    console.log '/', action
     if action == 'bet_request'
       player.betRequest gameState, (err, bet) ->
         return next err if err
