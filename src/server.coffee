@@ -8,9 +8,9 @@ module.exports = ->
   app.use express.urlencoded()
 
   app.all '/', (req, res, next) ->
-    console.log '/', action
     action = req.body?.action ? req.query?.action
     gameState = req.body?.game_state ? req.query?.game_state
+    console.log '/', action, gameState
     if typeof gameState is 'string'
       try
         gameState = JSON.parse gameState
