@@ -8,7 +8,8 @@ module.exports =
   betRequest: (gameState, next) ->
     if gameState.testBet
       return next null, gameState.testBet
-    minBet = gameState.small_blind * 2
+    bigBlind = gameState.small_blind * 2
+    minBet = bigBlind
     bet = gameState.current_buy_in
     bet = minBet unless bet > minBet
 
@@ -26,8 +27,22 @@ module.exports =
       suit: card.suit
       rank: decodeRank card.rank
 
+    communityCards = _.map (me.community_cards ? []), (card) ->
+      suit: card.suit
+      rank: decodeRank card.rank
+
     if cards[0]?.rank == cards[0]?.rank
-      return next null, minBet * 10
+      return next null, bigBlind
+
+    allCards = cards.concat communityCards
+
+    pairs = _ allCards
+    .groupBy (card) -> String card.rank
+    .filter (group) -> group.length > 1
+    .value()
+
+    if pairs.length > 0
+      return next null, bigBlind
 
     next null, bet
   showdown: (gameState, next) ->
