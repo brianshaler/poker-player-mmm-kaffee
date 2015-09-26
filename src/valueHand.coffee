@@ -58,7 +58,7 @@ module.exports = (hand) ->
 
   if hand.community.length == 0
     if hand.hole[0].suit == hand.hole[1].suit
-      return 1
+      value = 1
     if detectStraight hand.all, 2
       return 0.5
 
