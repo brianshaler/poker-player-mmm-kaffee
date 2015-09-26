@@ -42,10 +42,10 @@ module.exports =
 
     if value >= 0.5
       bet = if gameState.players[0]?.status == 'active'
-        600
+        1000
       else
         300
-      if value < 1
+      if value < 0.9
         bet = maxBet unless bet < maxBet
       bet = minBet unless bet > minBet
       return sendBet bet
