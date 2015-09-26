@@ -51,7 +51,7 @@ module.exports =
       return sendBet bet
 
     if communityCards.length == 0
-      if value > 0.5 and me.bet < 200
+      if value >= 0.3 and me.bet < 200
         return sendBet 200 - (me?.bet ? 0)
       unless value < 0.1
         return sendBet maxBet
