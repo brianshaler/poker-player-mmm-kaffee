@@ -15,9 +15,10 @@ module.exports = (hand) ->
   .filter (group) -> group.length > 1
   .value()
 
-  suits = _ hand.all
+  ofSuit = _ hand.all
   .groupBy (card) -> card.suit
-  .value()
+  .map (group, suit) -> suit
+  .max()
 
   myPairs = pairs.length - cpairs.length
 
@@ -40,8 +41,12 @@ module.exports = (hand) ->
   if hand.all.length < 7 and detectStraight hand.all, 4
     value = 0.5
 
-  if suits.length == 1
+  if ofSuit == hand.all.length
     value = value + (1 - value) * 0.5
+  if ofSuit >= 4 and hand.all.length < 7
+    value = 0.5
+  if ofSuit >= 5
+    value = 1
 
   if myPairs > 0
     if hand.all.length < 4
