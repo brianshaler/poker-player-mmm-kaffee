@@ -4,6 +4,7 @@ pkg = require '../package.json'
 
 getMinBet = require './getMinBet'
 analyzeHand = require './analyzeHand'
+valueHand = require './valueHand'
 
 module.exports =
   version: ->
@@ -27,7 +28,7 @@ module.exports =
     if value > 0
       return next null, minBet * 10
 
-    if seriousness > value * 2
+    if seriousness > value * 5
       return next null, 0
 
     next null, minBet
