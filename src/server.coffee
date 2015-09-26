@@ -26,10 +26,12 @@ module.exports = ->
         if err
           console.log err
           return res.send null, 0
-        hand = analyzeHand gameState
+        myCards = gameState.players[gameState.in_action].hole_cards
+        communityCards = gameState.community_cards
+        hand = analyzeHand myCards, communityCards
         logs = [
           JSON.stringify gameState
-          JSON.stringify hand.hole
+          'hand.hole' + JSON.stringify hand.hole
           "betting #{bet}"
         ].join '\n'
         console.log logs
