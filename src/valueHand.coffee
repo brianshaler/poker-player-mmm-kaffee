@@ -21,6 +21,9 @@ module.exports = (hand) ->
 
   value = 0
 
+  if myPairs > 0 and pairs.length > 0
+    return 1
+
   if suits.length == 1
     value = value + (1 - value) * 0.5
 
