@@ -22,6 +22,13 @@ module.exports =
     unless me.hole_cards?.length > 1
       return next null, bet
 
+    cards = _.map me.hole_cards, (card) ->
+      suit: card.suit
+      rank: decodeRank card.rank
+
+    if cards[0]?.rank == cards[0]?.rank
+      return next null, minBet * 10
+
     next null, bet
   showdown: (gameState, next) ->
     next()
