@@ -1,5 +1,7 @@
 _ = require 'lodash'
 
+detectStraight = require './detectStraight'
+
 module.exports = (hand) ->
   variance = 8 - hand.all.length
 
@@ -28,6 +30,15 @@ module.exports = (hand) ->
 
   if myPairs > 0 and pairs.length > 0
     return 1
+
+  if detectStraight hand.all, 5
+    return 1
+
+  if hand.all.length < 6 and detectStraight hand.all, 4
+    return 0.5
+
+  if hand.all.length < 7 and detectStraight hand.all, 4
+    value = 0.5
 
   if suits.length == 1
     value = value + (1 - value) * 0.5
