@@ -8,5 +8,5 @@ describe 'player', ->
     player.betRequest @bet4, (err, bet) ->
       Should.not.exist err
       Should.exist bet
-      console.log 'bet', bet
+      # console.log 'bet', bet
       done()
