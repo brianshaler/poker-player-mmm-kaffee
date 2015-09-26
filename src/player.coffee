@@ -27,6 +27,7 @@ module.exports =
     communityCards = gameState.community_cards
     hand = analyzeHand myCards, communityCards
     value = valueHand hand
+    console.log "VALUE #{value}"
 
     if commitment <= 20
       if seriousness > 2 and value < 0.5
