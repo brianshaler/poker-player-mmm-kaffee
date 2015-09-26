@@ -10,8 +10,10 @@ module.exports =
   version: ->
     pkg.version
   betRequest: (gameState, next) ->
+    sendBet = (b) -> next null, Math.round b
+
     if gameState.testBet
-      return next null, gameState.testBet
+      return sendBet gameState.testBet
 
     me = gameState.players[gameState.in_action]
     commitment = me.bet
@@ -29,10 +31,10 @@ module.exports =
     if commitment == 0
       if seriousness > 2 and value < 0.5
         console.log 'too serious'
-        return next null, 0
+        return sendBet 0
       if seriousness > 5 and value < 0.8
         console.log 'too serious'
-        return next null, 0
+        return sendBet 0
 
     if communityCards.length == 0
       if value >= 0.5
@@ -42,9 +44,9 @@ module.exports =
           200
         bet = maxBet unless bet < maxBet
         bet = minBet unless bet > minBet
-        return next null, maxBet
+        return sendBet maxBet
       unless value < 0.1
-        return next null, minBet
+        return sendBet minBet
 
     if value > 0
       bet = (gameState.small_blind * 2) * 2
@@ -53,12 +55,12 @@ module.exports =
         bet = me.stack * 0.5
       if value < 0.5 and seriousness > 2
         unless minBet < me.bet * 1.2
-          return next null, 0
-      return next null, bet
+          return sendBet 0
+      return sendBet bet
 
     if seriousness > value * 5 and minBet > me.bet * 1.2
-      return next null, 0
+      return sendBet 0
 
-    next null, minBet
+    sendBet minBet
   showdown: (gameState, next) ->
     next()
