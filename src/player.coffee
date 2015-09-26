@@ -32,7 +32,10 @@ module.exports =
 
     if communityCards.length == 0
       if value >= 0.5
-        return next null, 600
+        if gameState.players[0]?.status == 'active'
+          return next null, 1000
+        else
+          return next null, 200
       unless value < 0.1
         return next null, minBet
 
