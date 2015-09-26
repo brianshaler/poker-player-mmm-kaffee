@@ -28,7 +28,7 @@ module.exports =
     if value > 0
       bet = (gameState.small_blind * 2) * 2
       bet = minBet if bet < minBet
-      return next null,
+      return next null, bet
 
     if seriousness > value * 5
       return next null, 0
