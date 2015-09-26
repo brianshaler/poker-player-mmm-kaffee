@@ -11,7 +11,7 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res, next){
   if(req.body.action == 'bet_request') {
-    gameState = JSON.parse(req.body.game_state)).toString();
+    gameState = JSON.parse(req.body.game_state).toString();
     player.betRequest(gameState, function (err, bet) {
       if (err) return next(err);
       res.send(200, bet);
