@@ -1,4 +1,8 @@
+pkg = require '../package.json'
+
 module.exports =
+  version: ->
+    pkg.version
   betRequest: (gameState, next) ->
     if gameState.testBet
       return next null, gameState.testBet
