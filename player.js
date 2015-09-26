@@ -1,10 +1,11 @@
+var pkg = require('./package.json');
 
 module.exports = {
 
-  VERSION: "Default JavaScript folding player",
+  VERSION: pkg.version,
 
   bet_request: function(game_state) {
-    return 0;
+    return 1;
   },
 
   showdown: function(game_state) {
