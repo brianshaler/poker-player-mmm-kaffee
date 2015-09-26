@@ -17,6 +17,9 @@ module.exports = (hand) ->
 
   value = 0
 
+  if myPairs > 0 and hand.all.length < 4
+    return 1
+
   if myPairs > 0
     value += 1
   else
