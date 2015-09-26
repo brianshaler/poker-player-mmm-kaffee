@@ -13,7 +13,7 @@ module.exports =
     if gameState.testBet
       return next null, gameState.testBet
 
-    commitment = gameState.players[gameState.in_action]?.bet
+    commitment = gameState.players?[gameState?.in_action]?.bet
     minBet = getMinBet gameState
     seriousness = minBet / (gameState.small_blind * 2)
 
@@ -26,7 +26,7 @@ module.exports =
       if seriousness > 2 and value < 0.5
         console.log 'too serious'
         return next null, 0
-      if seriousness > 5
+      if seriousness > 5 and value < 0.8
         console.log 'too serious'
         return next null, 0
 

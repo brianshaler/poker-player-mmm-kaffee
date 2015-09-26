@@ -23,4 +23,4 @@ describe 'valueHand', ->
 
     value = valueHand analyzeHand myCards, communityCards
 
-    value.should.be.greaterThan 0
+    value.should.be.greaterThan 0.9
