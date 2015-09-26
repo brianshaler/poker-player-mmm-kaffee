@@ -1,4 +1,4 @@
-var player = require('./player');
+var player = require('./lib/player');
 var express = require('express');
 var app = express();
 
@@ -9,9 +9,14 @@ app.get('/', function(req, res){
   res.send(200, 'OK')
 });
 
-app.post('/', function(req, res){
+app.post('/', function(req, res, next){
   if(req.body.action == 'bet_request') {
-    res.send(200, player.bet_request(JSON.parse(req.body.game_state)).toString());
+    gameState = JSON.parse(req.body.game_state)).toString();
+    player.betRequest(gameState, function (err, bet) {
+      if (err) return next(err);
+      res.send(200, bet);
+    });
+    // res.send(200, player.bet_request(JSON.parse(req.body.game_state)).toString());
   } else if(req.body.action == 'showdown') {
     player.showdown(JSON.parse(req.body.game_state));
     res.send(200, 'OK');
