@@ -1,2 +1,3 @@
-var server = require('./lib/server');
+require('coffee-script/register')
+var server = require('./src/server');
 server();
