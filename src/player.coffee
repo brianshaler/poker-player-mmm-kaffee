@@ -30,6 +30,10 @@ module.exports =
         console.log 'too serious'
         return next null, 0
 
+    if communityCards.length == 0
+      if value >= 0.5
+        return next null, 400
+
     if value > 0
       bet = (gameState.small_blind * 2) * 2
       bet = minBet if bet < minBet
