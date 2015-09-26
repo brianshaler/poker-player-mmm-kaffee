@@ -28,7 +28,7 @@ module.exports =
     hand = analyzeHand myCards, communityCards
     value = valueHand hand
 
-    if commitment == 0
+    if commitment <= 20
       if seriousness > 2 and value < 0.5
         console.log 'too serious'
         return sendBet 0
@@ -36,15 +36,16 @@ module.exports =
         console.log 'too serious'
         return sendBet 0
 
+    if value >= 0.5
+      bet = if gameState.players[0]?.status == 'active'
+        700
+      else
+        200
+      bet = maxBet unless bet < maxBet
+      bet = minBet unless bet > minBet
+      return sendBet maxBet
+
     if communityCards.length == 0
-      if value >= 0.5
-        bet = if gameState.players[0]?.status == 'active'
-          700
-        else
-          200
-        bet = maxBet unless bet < maxBet
-        bet = minBet unless bet > minBet
-        return sendBet maxBet
       unless value < 0.1
         return sendBet minBet
 
