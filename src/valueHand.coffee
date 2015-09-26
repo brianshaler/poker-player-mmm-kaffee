@@ -54,9 +54,11 @@ module.exports = (hand) ->
   if hand.community.length == 0
     if hand.hole[0].suit == hand.hole[1].suit
       return 1
+    if detectStraight hand.all, 2
+      return 0.5
 
   if hand.community.length < 3 or value > 0
-    highCards = _.filter hand.hole, (card) -> card.rank > 9
+    highCards = _.filter hand.hole, (card) -> card.rank > 10
     if highCards.length > 0
       value = value + (highCards.length / hand.all.length - value) * 0.5
       if hand.community.length == 0
