@@ -42,7 +42,7 @@ module.exports =
 
     if value >= 0.5
       bet = if gameState.players[0]?.status == 'active'
-        500
+        600
       else
         300
       if value < 1
