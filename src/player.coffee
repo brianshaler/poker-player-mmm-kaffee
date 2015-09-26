@@ -52,9 +52,9 @@ module.exports =
 
     if communityCards.length == 0
       if value > 0.5 and me.bet < 200
-        return sendBet 200
+        return sendBet 200 - (me?.bet ? 0)
       unless value < 0.1
-        return sendBet minBet
+        return sendBet maxBet
 
     if communityCards.length >= 3 and value < 0.2
       return sendBet 0
