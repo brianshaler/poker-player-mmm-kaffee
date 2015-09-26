@@ -20,7 +20,7 @@ module.exports =
     minBet = getMinBet gameState
     minBet = minBet + Math.round Math.random() * 2
     maxBet = me.stack * 0.8
-    maxBet = minBet unless maxBet < minBet
+    maxBet = minBet if maxBet < minBet
     seriousness = minBet / (gameState.small_blind * 2)
 
     myCards = gameState.players[gameState.in_action].hole_cards
