@@ -33,6 +33,8 @@ module.exports =
     if communityCards.length == 0
       if value >= 0.5
         return next null, 600
+      unless value < 0.1
+        return next null, minBet
 
     if value > 0
       bet = (gameState.small_blind * 2) * 2
