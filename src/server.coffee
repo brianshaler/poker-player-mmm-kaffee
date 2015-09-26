@@ -7,36 +7,21 @@ module.exports = ->
   app.use express.json()
   app.use express.urlencoded()
 
-  app.get '/', (req, res) ->
-    action = req.query.action
-    gameState = JSON.parse req.query.game_state ? '{}'
+  app.all '/', (req, res, next) ->
+    action = req.body?.action ? req.query?.action
+    gameState = req.body?.game_state ? req.query?.game_state
+    if typeof gameState is 'string'
+      gameState = JSON.parse gameState
 
-    console.log '/', req.query
-    if req.query.action == 'bet_request'
+    console.log '/', action
+    if action == 'bet_request'
       player.betRequest gameState, (err, bet) ->
         return next err if err
         res.send 200, bet
-    else if req.query.action == 'showdown'
+    else if action == 'showdown'
       player.showdown gameState, (err) ->
         res.send 200, 'OK'
-    else if req.query.action == 'version'
-      res.send 200, player.version()
-    else
-      res.send 200, 'OK'
-
-  app.post '/', (req, res, next) ->
-    action = req.body.action
-    gameState = JSON.parse req.body.game_state ? '{}'
-
-    if req.body.action == 'bet_request'
-      player.betRequest gameState, (err, bet) ->
-        return next err if err
-        res.send 200, bet
-      # res.send(200, player.bet_request(JSON.parse(req.query.game_state)).toString());
-    else if req.body.action == 'showdown'
-      player.showdown gameState, (err) ->
-        res.send 200, 'OK'
-    else if req.body.action == 'version'
+    else if action == 'version'
       res.send 200, player.version()
     else
       res.send 200, 'OK'
