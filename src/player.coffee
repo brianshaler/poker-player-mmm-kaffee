@@ -41,7 +41,8 @@ module.exports =
         800
       else
         300
-      bet = maxBet unless bet < maxBet
+      if value < 1
+        bet = maxBet unless bet < maxBet
       bet = minBet unless bet > minBet
       return sendBet maxBet
 
