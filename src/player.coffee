@@ -20,8 +20,11 @@ module.exports =
     hand = analyzeHand gameState
     value = valueHand hand
 
-    if commitment == 0 and seriousness > 2
-      unless value > 0
+    if commitment == 0
+      if seriousness > 2 and value < 0.5
+        console.log 'too serious'
+        return next null, 0
+      if seriousness > 5
         console.log 'too serious'
         return next null, 0
 
