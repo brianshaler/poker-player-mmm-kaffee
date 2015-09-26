@@ -10,3 +10,5 @@ module.exports =
     bet = gameState.current_buy_in
     bet = minBet unless bet > minBet
     next null, bet
+  showdown: (gameState, next) ->
+    next()
