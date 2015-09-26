@@ -15,11 +15,15 @@ module.exports = ->
       try
         gameState = JSON.parse gameState
       catch err
-        return next err
+        # return next err
+        console.log err
+        return res.send null, 0
 
     if action == 'bet_request'
       player.betRequest gameState, (err, bet) ->
-        return next err if err
+        if err
+          console.log err
+          return res.send null, 0
         res.send 200, bet
     else if action == 'showdown'
       player.showdown gameState, (err) ->
