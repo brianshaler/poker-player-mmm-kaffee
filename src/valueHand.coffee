@@ -19,6 +19,11 @@ module.exports = (hand) ->
 
   myPairs = pairs.length - cpairs.length
 
+  threeOrMore = _.find pairs, (group) ->
+    group.length > 2
+  if !!threeOrMore
+    return 1
+
   value = 0
 
   if myPairs > 0 and pairs.length > 0
